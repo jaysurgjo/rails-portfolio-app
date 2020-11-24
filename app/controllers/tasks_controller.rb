@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   if @task.save
     redirect_to task_path(@task)
   else
-    render 'new'
+    redirect_to task_path(@task)
   end
 end
 
@@ -41,7 +41,7 @@ end
 
   def destroy
     @task.destroy
-    redirect_to task_path
+    redirect_to new_task_path, :notice => "Your task has been deleted"
   end
 
   private
@@ -51,6 +51,6 @@ end
     end
 
     def task_params
-      params.require(:task).permit(:name,)
+      params.permit(:task)
   end
 end

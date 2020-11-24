@@ -16,13 +16,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
+    @user = User.create(user_params)
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        redirect_to @user
       else
-        format.html { render :new }
+        render :new
       end
     end
   end
@@ -31,14 +29,13 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         redirect_to @user
       else
-        render :edit
+        render :edit_user_path
       end
     end
-  end
 
   def destroy
     @user.destroy
-      redirect_to users_url
+      redirect_to users_path
     end
 
   private
