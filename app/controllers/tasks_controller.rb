@@ -23,25 +23,25 @@ class TasksController < ApplicationController
   def create
     @task = Task.create(task_params)
   if @task.save
-    redirect_to task_path(@task)
+    redirect_to tasks_path(@task)
   else
-    redirect_to task_path(@task)
+    render 'show'
   end
 end
 
 
   def update
     if @task.update(task_params)
-    redirect_to task_path(@task)
+    redirect_to tasks_path(@task)
   else
-    render :edit
+    render 'show'
   end
 end
 
 
   def destroy
     @task.destroy
-    redirect_to new_task_path, :notice => "Your task has been deleted"
+    redirect_to show_task_path, :notice => "Your task has been deleted"
   end
 
   private

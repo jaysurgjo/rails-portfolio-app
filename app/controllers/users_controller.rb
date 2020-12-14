@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @task = @user.tasks.find(current_user)
   end
 
   def new
@@ -16,26 +17,26 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(current_user)
       if @user.save
-        redirect_to @user
+        redirect_to task_path(@user)
       else
-        render :new
+        render 'show'
       end
     end
   end
 
   def update
-      if @user.update(user_params)
+      if @user.update(current_user)
         redirect_to @user
       else
-        render :edit_user_path
+        render 'edit'
       end
     end
 
   def destroy
     @user.destroy
-      redirect_to users_path
+      redirect_to user_path
     end
 
   private
@@ -44,5 +45,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.fetch(:user, {})
+      #params.permit(:username, :password)
+      #params.permit(:user_id, :username, :password)
+      params.require(:current_user).permit(:username, :password, :user)
     end

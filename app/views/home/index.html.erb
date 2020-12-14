@@ -1,27 +1,5 @@
-<h2>New User Sign Up</h2>
-<br>
-<br>
-<h1>Create Username and Password</h1>
+<h1>Home</h1>
 
-<%= form_for @user do |f|%>
+<%= link_to "signup", new_user_path %>
 
-<%= f.label :email%><br>
-
-<%= f.text_field :email%><br>
-
-<%= f.label :password%><br>
-
-<%= f.password_field :password%><br>
-
-<%= f.submit %>
-
-<%end%>
-
-
-<% if current_user %>
-  Logged in as <%= current_user.email %>.
-  <%= link_to “logout”, logout_path %>
-<% else %>
-  <%= link_to “signup”, signup_path %> or
-  <%= link_to “Login”, login_path %>
-<% end %>
+<%= link_to "Login", login_path %>
