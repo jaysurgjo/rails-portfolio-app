@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       session[:user.id] = user_id
       redirect_to root_url
     else
-      render "new"
+      redirect_to new_task_path
     end
   end
 
