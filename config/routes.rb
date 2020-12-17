@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root "home#index"
   get 'home/index', to: 'home#index'
 
-  resources :tasks
+  resources :tasks do
+    get 'delete_task' => 'tasks#destroy', as: :delete_task
+  end
 
   get 'signup/users', as: 'signup'
   resources :users

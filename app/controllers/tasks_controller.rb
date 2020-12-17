@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update]
   before_action :require_user, except: [:index, :show, :like]
-  before_action :same_user, only: [:edit, :update, :destroy]
+  before_action :same_user, only: [:edit, :update]
 
 
   def index
@@ -10,7 +10,7 @@ class TasksController < ApplicationController
 
 
   def show
-    @task = @user.tasks.find(current_user)
+    @task = current_user.tasks.find(params[:id])
   end
 
 
@@ -44,9 +44,12 @@ end
 
 
   def destroy
-    Task.find(params[:id]).destroy
-    #@task.destroy
-    redirect_to show_task_path
+    @task = current_user.tasks.find(params[:task_id])
+    if @task.destroy
+      redirect_to tasks_path, notice: 'Task deleted successfully'
+    else
+      redirect_to tasks_path, notice: "You don't have permission to delete this task"
+    end
   end
 
   private
@@ -56,7 +59,7 @@ end
     end
 
     def task_params
-      params.require(:task).permit(:name, :facts [])
+      params.require(:task).permit(:name, :facts)
   end
 
   def same_user
