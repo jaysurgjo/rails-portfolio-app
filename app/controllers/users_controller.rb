@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :same_user, only: [:edit, :update, :destroy]
+  before_action :require_admin, only: [:destroy]
 
   def index
     @users = User.all
   end
 
   def show
-    @task = @user.tasks.find(current_user)
+    @user_task = @user
   end
 
   def new
@@ -19,9 +21,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(current_user)
       if @user.save
-        redirect_to task_path(@user)
+        session[:user_id] = @user.id
+        redirect_to user_path(@user)
       else
-        render 'show'
+        render 'new'
       end
     end
   end
@@ -35,7 +38,8 @@ class UsersController < ApplicationController
     end
 
   def destroy
-    @user.destroy
+    if !@user.admin?
+      @user.destroy
       redirect_to user_path
     end
 
@@ -47,5 +51,18 @@ class UsersController < ApplicationController
     def user_params
       #params.permit(:username, :password)
       #params.permit(:user_id, :username, :password)
-      params.require(:current_user).permit(:username, :password, :user)
+      params.require(:current_user).permit(:email, :username, :password, :user)
     end
+
+    def same_user
+    if current_user != @user and !current_user.admin?
+      redirect_to user_path
+    end
+  end
+
+    def require_admin
+    if logged_in? && !current_user.admin?
+      redirect_to root_path
+    end
+  end
+end
