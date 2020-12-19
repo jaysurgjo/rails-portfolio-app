@@ -15,7 +15,7 @@
         <td><%= task.facts %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task_delete_task_path(task) %></td>
+        <td><%= link_to 'Delete', task_delete_task_path(task) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,4 +25,4 @@
 
 <%= link_to 'New Task', new_task_path %> |
 
-<%= link_to 'Logout', logout_path, method: :destroy%>
+<%= link_to 'Logout', logout_path, method: :delete%>

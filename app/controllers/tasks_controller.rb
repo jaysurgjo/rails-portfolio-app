@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update]
-  before_action :require_user, except: [:index, :show, :like]
+  before_action :require_user, except: [:index, :show]
   before_action :same_user, only: [:edit, :update]
 
 
@@ -46,7 +46,7 @@ end
   def destroy
     @task = current_user.tasks.find(params[:task_id])
     if @task.destroy
-      redirect_to tasks_path, notice: 'Task deleted successfully'
+      redirect_to tasks_path, notice: "Task deleted successfully"
     else
       redirect_to tasks_path, notice: "You don't have permission to delete this task"
     end

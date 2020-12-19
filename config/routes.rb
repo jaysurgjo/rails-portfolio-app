@@ -7,12 +7,19 @@ Rails.application.routes.draw do
     get 'delete_task' => 'tasks#destroy', as: :delete_task
   end
 
-  get 'signup/users', as: 'signup'
-  resources :users
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
+
+  get '/signup/users', to: 'users#new'
+  resources :users, except: [:new]
 
   resources :sessions, only: [:new, :create, :destroy]
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
+    get '/logout', to: 'sessions#destroy'
     delete '/logout', to: 'sessions#destroy'
     post '/logout', to: 'sessions#destroy'
 end
