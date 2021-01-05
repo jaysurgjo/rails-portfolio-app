@@ -16,7 +16,10 @@ class User < ApplicationRecord
       save!(:validate => false)
     end
 
-  has_many :tasks, through: :assignments
+  has_many :tasks #through: :assignments
+  has_many :comments
+  #has_many :assignments
+
 
   private
   def confirmation_token

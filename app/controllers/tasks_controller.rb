@@ -59,7 +59,7 @@ end
     end
 
     def task_params
-      params.require(:task).permit(:name, :facts)
+      params.require(:task).permit(:name, :facts, :comments)
   end
 
   def same_user

@@ -21,15 +21,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(current_user)
       if @user.save
-        UserMailer.registration_confirmation(@user).deliver
+        #UserMailer.registration_confirmation(@user).deliver
         flash[:success] = "Please confirm your email address to continue"
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       else
-        render 'new'
+        render 'show'
       end
     end
-  end
 
   def update
       if @user.update(current_user)
@@ -44,6 +43,7 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to user_path
     end
+  end
 
   private
     def set_user
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:current_user).permit(:email, :password, :user)
+      params.require(:user).permit(:username, :password)
     end
 
     def same_user

@@ -8,5 +8,11 @@
   <%= @task.facts %>
 </p>
 
+<p>
+  <strong>Comments:</strong>
+  <%= @task.comments %>
+</p>
+
+
 <%= link_to 'Back', tasks_path %> |
 <%= link_to 'Logout', logout_path, method: :delete%>
