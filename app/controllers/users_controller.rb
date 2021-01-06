@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_task = @user
+    #@user_task = @user
+    @use = User.all
   end
 
   def new
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(current_user)
+    @user = User.new(user_params)
       if @user.save
         #UserMailer.registration_confirmation(@user).deliver
         flash[:success] = "Please confirm your email address to continue"
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :password)
+      params.require(:user).permit(:username, :password, :password_confirmation)
     end
 
     def same_user

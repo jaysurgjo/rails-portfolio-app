@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_secure_password
   validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
+  validates :password, confirmation: { case_sensitive: true }
 
   def email_activate
       self.email_confirmed = true
@@ -16,15 +17,12 @@ class User < ApplicationRecord
       save!(:validate => false)
     end
 
-  has_many :tasks #through: :assignments
   has_many :comments
-  #has_many :assignments
-
 
   private
   def confirmation_token
         if self.confirm_token.blank?
             self.confirm_token = SecureRandom.urlsafe_base64.to_s
         end
-      end
+    end
 end
