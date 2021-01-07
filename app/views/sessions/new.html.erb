@@ -1,4 +1,10 @@
-<h1>Login</h1>
+<h1>Login to the Task app.</h1>
+
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
 
 <%= form_tag sessions_path do |form| %>
   <div class=”field”>

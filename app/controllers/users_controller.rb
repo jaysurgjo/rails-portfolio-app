@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    #@user_task = @user
-    @use = User.all
+    @user_task = @user
+    #@user = User.all
   end
 
   def new
@@ -23,11 +23,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
       if @user.save
         #UserMailer.registration_confirmation(@user).deliver
-        flash[:success] = "Please confirm your email address to continue"
+        flash[:notice] = "Please confirm your email address to continue"
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       else
-        render 'show'
+        flash[:danger] = "You have to create a valid username and password to continue"
+        render 'new'
       end
     end
 
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
   def destroy
     if !@user.admin?
       @user.destroy
-      redirect_to user_path
+      redirect_to user_path, flash[:notice] = "You have logged out successfully!"
     end
   end
 

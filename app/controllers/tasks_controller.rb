@@ -27,6 +27,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
   if @task.save
+    flash[:success] = "You have created a task!"
     redirect_to tasks_path(@task)
   else
     render 'show'
@@ -36,6 +37,7 @@ end
 
   def update
     if @task.update(task_params)
+    flash[:sucess] = "You have updated a task successfully!"
     redirect_to tasks_path(@task)
   else
     render 'edit'
@@ -46,9 +48,10 @@ end
   def destroy
     @task = current_user.tasks.find(params[:task_id])
     if @task.destroy
-      redirect_to tasks_path, notice: "Task deleted successfully"
+      redirect_to tasks_path
     else
-      redirect_to tasks_path, notice: "You don't have permission to delete this task"
+      flash[:danger] = "You don't have permission to delete this task"
+      redirect_to tasks_path
     end
   end
 

@@ -1,10 +1,6 @@
-<h2>New User Sign Up</h2>
+<h2>New User Sign Up, Create Username and Password</h2>
 <br>
-<br>
-<h1>Create Username and Password</h1>
-<br>
-<br>
-<h1>Username should be your email</h1>
+
 
 <%= form_for @user do |f|%>
 
@@ -14,9 +10,9 @@
 <%= f.label :password %><br>
 <%= f.password_field :password %><br>
 
-<%=f.label :password_confirmation %><br>
+<%=f.label :password_confirmation, "Confirmation" %><br>
 <%=f.password_field :password_confirmation %><br>
 
-<%= f.submit %>
+<%= f.submit "Join"%>
 
 <%end%>
