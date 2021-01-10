@@ -1,11 +1,5 @@
 <%= form_with(model: user, local: true) do |form| %>
-<ul>
-  <% if !!flash[:errors] %>
-    <% flash[:errors].each do |e| %>
-      <p><%= e %></p> <br>
-   <% end %>
-  <% end %>
-</ul>
+
   <div class="actions">
     <%= form.submit %>
   </div>

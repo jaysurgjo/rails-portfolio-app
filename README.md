@@ -10,5 +10,5 @@ To use this app, just clone, run bundle install, rake db:migrate, rails s.
 Assign task to other Users
 fix database
 fix alerts
-user profile
-style app
+#user profile
+#style app

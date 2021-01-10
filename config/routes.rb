@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :tasks do
     get 'delete_task' => 'tasks#destroy', as: :delete_task
+    post 'assign_task' => 'tasks#assign', as: :assign
   end
 
   resources :users do
