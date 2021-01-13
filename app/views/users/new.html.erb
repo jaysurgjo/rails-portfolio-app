@@ -1,8 +1,14 @@
-<h2>New User Sign Up, Create Username and Password</h2>
-<br>
+<h1>New User Sign Up, Create Username and Password</h1>
+
+<h2>Valid email format example@aol.com</h2>
+<h2>Password must be at least 5 charachters.</h2>
+
 
 
 <%= form_for @user do |f|%>
+
+<%= f.label :email %><br>
+<%= f.text_field :email %><br>
 
 <%= f.label :username %><br>
 <%= f.text_field :username %><br>

@@ -32,6 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'sprockets-rails'
 gem 'jquery-rails'
 
+gem 'omniauth-github'#, github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -55,6 +58,7 @@ group :development do
 
   gem 'pry', '~> 0.13.1'
   gem 'pry-rails', '~> 0.3.9'
+  gem 'figaro', '~> 1.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

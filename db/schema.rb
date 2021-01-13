@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210105182836) do
+ActiveRecord::Schema.define(version: 20210111201032) do
 
   create_table "comments", force: :cascade do |t|
     t.text "description"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20210105182836) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
+    t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,7 +39,12 @@ ActiveRecord::Schema.define(version: 20210105182836) do
     t.string "confirm_token"
     t.boolean "admin", default: false
     t.integer "comment_id"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["comment_id"], name: "index_users_on_comment_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

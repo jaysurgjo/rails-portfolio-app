@@ -48,7 +48,7 @@ class TasksController < ApplicationController
   def destroy
     @task = current_user.tasks.find(params[:task_id])
     if @task.destroy
-      flash[:success] = "deleted task"
+      flash[:success] = "You deleted a task"
       redirect_to tasks_path
     else
       flash[:danger] = "You don't have permission to delete this task"

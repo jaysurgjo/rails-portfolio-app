@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :same_user, only: [:edit, :update, :destroy]
   before_action :require_admin, only: [:destroy]
+  #skip_before_action :verify_authenticity_token, only: :create_github
 
   def index
     @users = User.all
@@ -9,7 +10,6 @@ class UsersController < ApplicationController
 
   def show
     @user_task = @user
-    #@user = User.all
   end
 
   def new
@@ -21,16 +21,20 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-      if @user.save
-        #UserMailer.registration_confirmation(@user).deliver
-        flash[:notice] = "Please confirm your email address to continue"
-        session[:user_id] = @user.id
-        redirect_to user_path(@user)
-      else
-        flash[:danger] = "You have to create a valid username and password to continue"
-        render 'new'
-      end
+    if @user.save
+      #UserMailer.registration_confirmation(@user).deliver
+      #flash[:notice] = "Please confirm your email address to continue"
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    else
+      flash[:danger] = "You have to create a valid username and password to continue"
+      render 'new'
     end
+  end
+
+  # def create_github
+  #   binding.pry
+  # end
 
   def update
       if @user.update(current_user)
@@ -53,7 +57,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 
     def same_user
