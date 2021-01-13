@@ -10,7 +10,9 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                      format: { with: VALID_EMAIL_REGEX },
                      uniqueness: { case_sensitive: false }
-  has_many :tasks, dependent: :destroy
+  has_many :created_tasks, class_name: "Task", dependent: :destroy
+  has_many :comments
+  has_many :commented_tasks, through: :comments, source: :task
   has_secure_password
   validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
   validates :password, confirmation: { case_sensitive: true }
@@ -21,7 +23,17 @@ class User < ApplicationRecord
       save!(:validate => false)
     end
 
-  has_many :comments
+    def self.find_or_create_from_auth(info)
+      user = User.find_or_create_by(email: info.email)
+
+      pass = SecureRandom.hex
+      user.username = info.nickname
+      user.email = info.email
+      user.password = pass
+      user.password_confirmation = pass
+      user.save
+      user
+    end
 
   private
   def confirmation_token
@@ -29,4 +41,5 @@ class User < ApplicationRecord
             self.confirm_token = SecureRandom.urlsafe_base64.to_s
         end
     end
+
 end

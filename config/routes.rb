@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root "home#index"
   get 'home/index', to: 'home#index'
 
-  #get '/auth/github', to: "users#create_github", as: "github_login"
-  #get '/auth/:provider/callback', to: "users#create_github"
+  get '/auth/github', as: "github_login"
+  get '/auth/:provider/callback', to: "users#create_github"
 
   resources :tasks do
     get 'delete_task' => 'tasks#destroy', as: :delete_task

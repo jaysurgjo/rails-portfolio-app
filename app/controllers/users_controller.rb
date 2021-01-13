@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :same_user, only: [:edit, :update, :destroy]
   before_action :require_admin, only: [:destroy]
-  #skip_before_action :verify_authenticity_token, only: :create_github
 
   def index
     @users = User.all
@@ -32,9 +31,17 @@ class UsersController < ApplicationController
     end
   end
 
-  # def create_github
-  #   binding.pry
-  # end
+  def create_github
+    info = request.env['omniauth.auth'].info
+    @user = User.find_or_create_from_auth(info)
+    if @user
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    else
+      flash[:danger] = "Invalid Github User"
+      render 'new'
+    end
+  end
 
   def update
       if @user.update(current_user)
