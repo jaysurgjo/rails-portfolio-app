@@ -5,12 +5,12 @@ class TasksController < ApplicationController
 
 
   def index
-    @tasks = current_user.created_tasks
+    @tasks = current_user.tasks
   end
 
 
   def show
-    @task = current_user.created_tasks.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     @users = User.all
   end
 
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
 
 
   def destroy
-    @task = current_user.created_tasks.find(params[:task_id])
+    @task = current_user.tasks.find(params[:task_id])
     if @task.destroy
       flash[:success] = "You deleted a task"
       redirect_to tasks_path
