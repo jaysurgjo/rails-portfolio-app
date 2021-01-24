@@ -21,8 +21,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      #UserMailer.registration_confirmation(@user).deliver
-      #flash[:notice] = "Please confirm your email address to continue"
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else

@@ -67,6 +67,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def complete
+      @task = Task.find(params[:task_id])
+      @task.update_attribute(:completed, true)
+      flash[:notice] = "Task completed!"
+      redirect_to tasks_path(@task)
+  end
+
   private
 
     def set_task
@@ -82,4 +89,4 @@ class TasksController < ApplicationController
         redirect_to task_path
       end
     end
-end
+  end

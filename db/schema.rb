@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210113173217) do
-
-  create_table "comments", force: :cascade do |t|
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "task_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 20210124173631) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
@@ -28,6 +19,7 @@ ActiveRecord::Schema.define(version: 20210113173217) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.boolean "completed"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,16 +28,7 @@ ActiveRecord::Schema.define(version: 20210113173217) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed"
-    t.string "confirm_token"
-    t.boolean "admin", default: false
-    t.integer "comment_id"
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.index ["comment_id"], name: "index_users_on_comment_id"
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.bigint "task_id"
   end
 
 end

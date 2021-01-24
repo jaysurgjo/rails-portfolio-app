@@ -21,5 +21,12 @@
   <% end %>
 </p>
 
+<p>
+  <%= form_with url: task_complete_path(@task) do |form| %>
+    <strong>Completed this Task:</strong>
+    <%= form.submit "Complete" %>
+  <% end %>
+</p>
+
 <%= link_to 'Back', tasks_path %> |
 <%= link_to 'Logout', logout_path, method: :delete%>
