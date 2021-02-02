@@ -25,7 +25,9 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %> |
+<%= link_to 'Show Tasks', tasks_path(@task) %> |
+
+<%= link_to 'New Task', new_task_path(@task) %> |
 
 <%= link_to 'Back', users_path %> |
 

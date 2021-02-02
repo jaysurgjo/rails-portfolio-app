@@ -17,7 +17,7 @@
   <%= form_with url: task_assign_path(@task) do |form| %>
     <strong>Assign this Task:</strong>
     <%= form.select "user", options_from_collection_for_select(@users, 'id', 'username') %>
-    <%= form.submit "Assign"%>
+    <%= form.submit "Assign" %>
   <% end %>
 </p>
 

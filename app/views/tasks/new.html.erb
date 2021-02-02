@@ -2,8 +2,8 @@
 
 <%= render 'form', task: @task %>
 
-<%= link_to 'Show Tasks', tasks_path %>
+<%= link_to 'Show Tasks', tasks_path(@task) %>
 
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Back', tasks_path(@task) %>
 
 <%= link_to 'Logout', logout_path, method: :delete %>

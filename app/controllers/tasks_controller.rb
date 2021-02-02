@@ -1,10 +1,12 @@
-class TasksController < ApplicationController
+  class TasksController < ApplicationController
+  #before_action :set_project
   before_action :set_task, only: [:show, :edit, :update]
   before_action :require_user, except: [:index, :show]
   before_action :same_user, only: [:edit, :update]
 
 
   def index
+    #@tasks = Task.all
     @tasks = current_user.tasks
   end
 
@@ -75,6 +77,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+    # def set_project
+    #   @project = Project.find(params[:project_id])
+    # end
 
     def set_task
       @task = Task.find(params[:id])

@@ -6,6 +6,8 @@ class User < ApplicationRecord
                      format: { with: VALID_EMAIL_REGEX },
                      uniqueness: { case_sensitive: false }
   has_many :tasks, class_name: "Task", dependent: :destroy
+  #has_many :projects, through: :users, source: :projects
+  #has_many :tasks, through: :users, source: :tasks
   has_secure_password
   validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
   validates :password, confirmation: { case_sensitive: true }
