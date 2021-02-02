@@ -35,6 +35,8 @@ gem 'jquery-rails'
 gem 'omniauth-github', '~> 1.4.0'
 
 gem 'bootstrap', '~> 5.0.0.beta1'
+
+gem 'bootstrap-sass', '~> 3.3.7'
 #gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 # Use Capistrano for deployment
